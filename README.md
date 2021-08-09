@@ -47,3 +47,7 @@ test에선 변경하지 않은 변수 선언 _testState 에서 변경가능한 �
 
 setState 함수가 내부 변수를 변화 시키고 이를 프레임워크에 알려줘 다시 그릴수 있도록함
 
+widget 함수는 현재 상태를 구성하는 임시 객체
+
+CounterDisplay와 CounterIncrementor를 stateless widget 으로 구분하여 좀더 캡슐화를 진행할수 있음
+
