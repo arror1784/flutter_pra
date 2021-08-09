@@ -15,6 +15,10 @@ For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 # flutter_pra
+예제 코드들
+
+https://github.com/flutter/website/tree/master/examples
+
 
 build() 함수는 리엑트에서 render() 함수와 비슷한 역활을 하는듯 하다.
 
@@ -51,3 +55,13 @@ widget 함수는 현재 상태를 구성하는 임시 객체
 
 CounterDisplay와 CounterIncrementor를 stateless widget 으로 구분하여 좀더 캡슐화를 진행할수 있음
 
+# layout
+
+layout 또한 위젯임
+
+row - 양옆
+
+column - 위 아래
+
+기본 layout 종류 - Container, GridView, ListView, Stack
+매테리얼 위젯 - Card, ListTile
