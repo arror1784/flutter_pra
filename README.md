@@ -84,3 +84,21 @@ onPressed: () {
   Navigator.pop(context);
 }
 ```
+
+named route
+
+리액트 코드에서 주소로 화면을 전환하는것과 유사함
+```
+routes: {
+      // When we navigate to the "/" route, build the FirstScreen Widget
+      // "/" Route로 이동하면, FirstScreen 위젯을 생성합니다.
+      '/': (context) => FirstScreen(),
+      // "/second" route로 이동하면, SecondScreen 위젯을 생성합니다.
+      '/second': (context) => SecondScreen(),
+    },
+
+Navigator.pushNamed(context, '/second');
+
+```
+위 코드로 라우트 등록
+그 다음 코드로 이동
