@@ -85,7 +85,7 @@ onPressed: () {
 }
 ```
 
-named route
+# named route
 
 리액트 코드에서 주소로 화면을 전환하는것과 유사함
 ```
@@ -103,7 +103,7 @@ Navigator.pushNamed(context, '/second');
 위 코드로 라우트 등록
 그 다음 코드로 이동
 
-#file
+# file
 
 path_provider 플러그인을 통해 파일을 읽고 쓸수 있음
 
