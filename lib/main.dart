@@ -20,7 +20,7 @@ class MyAppBar extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.menu),
             tooltip: 'Navigation menu',
-            onPressed: null, // null disables the button
+            onPressed: () => {print("hello world")}, // null disables the button
           ),
           // Expanded expands its child to fill the available space.
           Expanded(
@@ -48,7 +48,7 @@ class MyScaffold extends StatelessWidget {
           MyAppBar(
             title: Text(
               'Example title',
-              style: Theme.of(context).primaryTextTheme.headline6,
+              style: Theme.of(context).primaryTextTheme.bodyText2,
             ),
           ),
           Expanded(
