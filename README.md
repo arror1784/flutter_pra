@@ -65,3 +65,22 @@ column - 위 아래
 
 기본 layout 종류 - Container, GridView, ListView, Stack
 매테리얼 위젯 - Card, ListTile
+
+# route
+
+화면
+
+Navigator 를 통해 페이지를 바꿈
+
+```route
+onPressed: () {
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => SecondRoute()),
+  );
+}
+
+onPressed: () {
+  Navigator.pop(context);
+}
+```
