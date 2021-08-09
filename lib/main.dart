@@ -1,99 +1,81 @@
-import 'dart:async';
-import 'dart:io';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
-  runApp(
-    MaterialApp(
-      title: 'Reading and Writing Files',
-      home: FlutterDemo(storage: CounterStorage()),
-    ),
-  );
-}
+void main() => runApp(MyApp());
 
-class CounterStorage {
-  Future<String> get _localPath async {
-    final directory = await getApplicationDocumentsDirectory();
-
-    return directory.path;
-  }
-
-  Future<File> get _localFile async {
-    final path = await _localPath;
-    print(path);
-    return File('$path/counter.txt');
-  }
-
-  Future<int> readCounter() async {
-    try {
-      final file = await _localFile;
-
-      // 파일 읽기
-      String contents = await file.readAsString();
-
-      return int.parse(contents);
-    } catch (e) {
-      // 에러가 발생할 경우 0을 반환
-      return 0;
-    }
-  }
-
-  Future<File> writeCounter(int counter) async {
-    final file = await _localFile;
-
-    // 파일 쓰기
-    return file.writeAsString('$counter');
+class MyApp extends StatelessWidget {
+  // 이 위젯은 어플리케이션의 최상위 위젯입니다.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Shared preferences demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: MyHomePage(title: 'Shared preferences demo'),
+    );
   }
 }
 
-class FlutterDemo extends StatefulWidget {
-  final CounterStorage storage;
-
-  FlutterDemo({Key? key, required this.storage}) : super(key: key);
+class MyHomePage extends StatefulWidget {
+  MyHomePage({ Key? key,required this.title}) : super(key: key);
+  final String title;
 
   @override
-  _FlutterDemoState createState() => _FlutterDemoState();
+  _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _FlutterDemoState extends State<FlutterDemo> {
+class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
   @override
   void initState() {
     super.initState();
-    widget.storage.readCounter().then((int value) {
-      setState(() {
-        _counter = value;
-      });
+    _loadCounter();
+  }
+
+  //시작할 때 counter 값을 불러옵니다.
+  _loadCounter() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _counter = (prefs.getInt('counter') ?? 0);
     });
   }
 
-  Future<File> _incrementCounter() {
+  //클릭하면 counter를 증가시킵니다.
+  _incrementCounter() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      _counter++;
+      _counter = (prefs.getInt('counter') ?? 0) + 1;
+      prefs.setInt('counter', _counter);
     });
-
-    // 파일에 String 타입으로 변수 값 쓰기
-    return widget.storage.writeCounter(_counter);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Reading and Writing Files')),
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
       body: Center(
-        child: Text(
-          'Button tapped $_counter time${_counter == 1 ? '' : 's'}.',
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              'You have pushed the button this many times:',
+            ),
+            Text(
+              '$_counter',
+              style: Theme.of(context).textTheme.bodyText1,
+            ),
+          ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
         tooltip: 'Increment',
         child: Icon(Icons.add),
-      ),
+      ), // 이 마지막 콤마는 build 메서드에 자동 서식이 잘 적용될 수 있도록 도와줍니다.
     );
   }
 }

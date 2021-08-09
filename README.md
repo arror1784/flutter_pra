@@ -130,3 +130,13 @@ Future<int> readCounter() async {
 }
 
 ```
+
+# shared_preferences
+
+싱글톤의 형태로 key-value를 저장하고 읽을수 있음
+
+```
+SharedPreferences prefs = await SharedPreferences.getInstance();
+_counter = (prefs.getInt('counter') ?? 0) + 1;
+_counter = (prefs.getInt('counter') ?? 0);
+```
