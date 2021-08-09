@@ -102,3 +102,31 @@ Navigator.pushNamed(context, '/second');
 ```
 위 코드로 라우트 등록
 그 다음 코드로 이동
+
+#file
+
+path_provider 플러그인을 통해 파일을 읽고 쓸수 있음
+
+getTemporaryDirectory(), getApplicationDocumentsDirectory() 등 여러 경로를 얻을수 있음
+
+```쓰기
+Future<File> writeCounter(int counter) async {
+  final file = await _localFile;
+
+  return file.writeAsString('$counter');
+}
+```
+```읽기
+Future<int> readCounter() async {
+  try {
+    final file = await _localFile;
+
+    String contents = await file.readAsString();
+
+    return int.parse(contents);
+  } catch (e) {
+    return 0;
+  }
+}
+
+```
