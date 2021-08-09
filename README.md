@@ -15,4 +15,7 @@ For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 # flutter_pra
-# flutter_pra
+
+Stateless Widget - 로드될때 한번만 그려지는 위젯 데이터 변경이 없는 위젯
+
+Stateful Widget - 데이터 변경이 필요한 위젯
